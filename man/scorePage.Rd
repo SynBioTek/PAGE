@@ -4,19 +4,23 @@
 \alias{scorePage}
 \title{scorePage: Gene Expression Signature Similarity based on Parametric Analysis of Gene Set Enrichment}
 \usage{
-scorePage(dat, top = 250, type = c("avg", "max"), similarity = TRUE,
-  isRank = FALSE)
+scorePage(dat, top = 250, ncore = 2, type = c("avg", "max"),
+  similarity = TRUE, isRank = FALSE, verbose = FALSE)
 }
 \arguments{
-\item{dat}{logFC matrix.}
+\item{dat}{logFC matrix}
 
-\item{top}{top genes selected.}
+\item{top}{top genes selected}
+
+\item{ncore}{the number of cores used}
 
 \item{type}{avg or max}
 
 \item{similarity}{boolean}
 
 \item{isRank}{boolean}
+
+\item{verbose}{verbose}
 }
 \value{
 a list
@@ -27,10 +31,11 @@ Gene Expression Signature Similarity based on Parametric Analysis of Gene Set En
 \examples{
 
 data(Psoriasis_Etanercept_LogFC)
-sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")$score
 
+sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")$score
 sim1 <- scorePage(Psoriasis_Etanercept_LogFC_rank, type="avg", isRank=TRUE)$score
 
+ 
 }
 \references{
 1. Kim, Seon-Young, and David J. Volsky. "PAGE: parametric analysis of gene set 

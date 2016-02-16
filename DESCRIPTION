@@ -2,10 +2,14 @@ Package: PAGE
 Title: Gene Expression Signature Similarity based on Parametric Analysis of Gene
     Set Enrichment
 Version: 0.0.0.9000
-Authors@R: person("Zhilong", "Jia", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Zhilong", "Jia", email = "zhilongjia@gmail.com", role = c("aut", "cre"))
+Description: Gene Expression Signature Similarity based on Parametric Analysis of Gene
+    Set Enrichment.
 Depends:
-    R (>= 3.2.0)
+    R (>= 3.2.0),
+    parallel,
+    foreach,
+    doParallel
 License: What license is it under?
 LazyData: true
 Suggests:
