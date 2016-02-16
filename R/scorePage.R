@@ -4,19 +4,30 @@
 #' 
 #' @param dat logFC matrix.
 #' @param top top genes selected.
-#' @param center boolean - median center gene expression matrix columns prior to analysis.
 #' @param type avg or max
 #' @param similarity boolean
+#' @param isRank boolean
 #' @return a list
 #' @export 
+#' @references 
+#' 1. Kim, Seon-Young, and David J. Volsky. "PAGE: parametric analysis of gene set 
+#' enrichment." BMC bioinformatics 6.1 (2005): 1.
+#' 
+#' 2. Iorio, Francesco, et al. "Discovery of drug mode of action and drug 
+#' repositioning from transcriptional responses." Proceedings of the National 
+#' Academy of Sciences 107.33 (2010): 14621-14626.
 #' @examples 
 #' 
-#' data(Psoriasis_Etanercept_LogFC_mat)
-#' sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")$score
+#' data(Psoriasis_Etanercept_LogFC)
 #' 
-scorePage <- function(dat, top=250, type=c("avg", "max"), similarity=TRUE) {
+#' sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")$score
+#' sim1 <- scorePage(Psoriasis_Etanercept_LogFC_rank, type="avg", isRank=TRUE)$score
+#' 
+#'  
+scorePage <- function(dat, top=250, type=c("avg", "max"), similarity=TRUE, isRank=FALSE) {
     
     dat <- as.matrix(dat)
+    if (isRank) { dat <- scale(dat, scale=FALSE) }
 
     # mu is mean of total logFC, mod is related with standard deviation of total logFC.
     mu <- apply(dat, 2, mean, na.rm=TRUE)
@@ -49,6 +60,7 @@ scorePage <- function(dat, top=250, type=c("avg", "max"), similarity=TRUE) {
     if (similarity) {
         page_score <- page_score / apply( abs(page_score), 2, max)
     }
+
     
     return (list(score=page_score, pval=p.val, Zscore_up=Zscore_up, Zscore_dn=Zscore_dn))
 }

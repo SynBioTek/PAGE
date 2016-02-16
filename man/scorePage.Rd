@@ -4,19 +4,19 @@
 \alias{scorePage}
 \title{scorePage: Gene Expression Signature Similarity based on Parametric Analysis of Gene Set Enrichment}
 \usage{
-scorePage(logFCmat, top = 250, center = TRUE, type = c("avg", "max"),
-  similarity = TRUE)
+scorePage(dat, top = 250, type = c("avg", "max"), similarity = TRUE,
+  isRank = FALSE)
 }
 \arguments{
-\item{logFCmat}{logFC matrix.}
+\item{dat}{logFC matrix.}
 
 \item{top}{top genes selected.}
-
-\item{center}{boolean - median center gene expression matrix columns prior to analysis.}
 
 \item{type}{avg or max}
 
 \item{similarity}{boolean}
+
+\item{isRank}{boolean}
 }
 \value{
 a list
@@ -26,9 +26,18 @@ Gene Expression Signature Similarity based on Parametric Analysis of Gene Set En
 }
 \examples{
 
-data(Psoriasis_Etanercept_LogFC_mat)
-sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")
+data(Psoriasis_Etanercept_LogFC)
+sim <- scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg")$score
 
+sim1 <- scorePage(Psoriasis_Etanercept_LogFC_rank, type="avg", isRank=TRUE)$score
 
+}
+\references{
+1. Kim, Seon-Young, and David J. Volsky. "PAGE: parametric analysis of gene set 
+enrichment." BMC bioinformatics 6.1 (2005): 1.
+
+2. Iorio, Francesco, et al. "Discovery of drug mode of action and drug 
+repositioning from transcriptional responses." Proceedings of the National 
+Academy of Sciences 107.33 (2010): 14621-14626.
 }
 

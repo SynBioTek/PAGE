@@ -5,3 +5,11 @@
 #' @docType data
 #' @keywords datasets
 NULL
+
+#' Psoriasis_Etanercept_LogFC_rank
+#' 
+#' A LogFC rank matrix related with Psoriasis and Etanercept
+#' @name Psoriasis_Etanercept_LogFC_rank
+#' @docType data
+#' @keywords datasets
+NULL
