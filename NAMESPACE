@@ -3,4 +3,5 @@
 export(scorePage)
 import(doParallel)
 import(foreach)
+import(methods)
 import(parallel)

@@ -1,10 +1,15 @@
-library(stringr)
-context("scorePage")
+library(PAGE)
+context("PAGE")
 
-data(Psoriasis_Etanercept_LogFC_mat)
+data(Psoriasis_Etanercept_LogFC)
 
 test_that("scorePage return a list", {
-    expect_is(scorePage(Psoriasis_Etanercept_LogFC_mat, type="avg"), "list")
-    expect_is(scorePage(Psoriasis_Etanercept_LogFC_mat, type="max"), "list")
+    expect_is(scorePage(Psoriasis_Etanercept_LogFC, type="avg"), "list")
+    expect_is(scorePage(Psoriasis_Etanercept_LogFC, type="max"), "list")
+    
+    dat_list <- lapply(data.frame(Psoriasis_Etanercept_LogFC), 
+        function(x) {names(x) <- rownames(Psoriasis_Etanercept_LogFC); x} )
+    expect_is(scorePage(dat_list, type="avg"), "list")
+     
 
 })

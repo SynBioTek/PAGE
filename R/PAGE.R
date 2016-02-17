@@ -1,15 +1,21 @@
-#' Psoriasis_Etanercept_LogFC_mat
+#' PAGE
 #' 
-#' A LogFC matrix related with Psoriasis and Etanercept
-#' @name Psoriasis_Etanercept_LogFC_mat
-#' @docType data
-#' @keywords datasets
+#' Gene Expression Signature Similarity based on Parametric Analysis of Gene Set Enrichment
+#' @name PAGE
+#' @docType package
+#' @keywords package
 NULL
 
-#' Psoriasis_Etanercept_LogFC_rank
+#' Psoriasis_Etanercept dataset.
 #' 
-#' A LogFC rank matrix related with Psoriasis and Etanercept
-#' @name Psoriasis_Etanercept_LogFC_rank
+#' An example dataset of Psoriasis and Etanercept. 
+#' 
+#' @format 
+#' \describe{
+#' \item{Psoriasis_Etanercept_LogFC_mat}{A LogFC matrix related with Psoriasis and Etanercept.}
+#' }
 #' @docType data
 #' @keywords datasets
+#' @name Psoriasis_Etanercept_LogFC
+#' @aliases Psoriasis_Etanercept_LogFC
 NULL
