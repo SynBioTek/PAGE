@@ -47,7 +47,7 @@ page1 <- function(datM, geneV, isRank=TRUE, adjust="fdr"){
     similarity <- zscore/abs(z_max)
     
     P_Value <- 2*pnorm(-abs(zscore))
-    FDR <- p.adjust(pval, method = adjust)
+    FDR <- p.adjust(P_Value, method = adjust)
     cbind(zscore, similarity, P_Value, FDR)
 }
 
@@ -61,7 +61,13 @@ page2 <- function(datM, gene_up, gene_dn, isRank=TRUE, adjust="fdr"){
     mu <- apply(datM, 2, mean, na.rm=TRUE)
     sigma <- apply(datM, 2, sd, na.rm=TRUE)
     
-    #zscore
+    gene_up <- intersect(gene_up, rownames(datM))
+    gene_dn <- intersect(gene_dn, rownames(datM))
+    if (length(gene_up)==0 | length(gene_dn)==0 ) {
+        stop("Improper Input. Only HGCN gene symbols are accepted.")
+    }
+    
+    # zscore
     Sm_up <- apply(datM[gene_up,], 2, mean, na.rm=TRUE)
     zscore_up <- (Sm_up - mu)* length(gene_up)^(1/2)/sigma
     
@@ -76,10 +82,11 @@ page2 <- function(datM, gene_up, gene_dn, isRank=TRUE, adjust="fdr"){
     top_mean <- apply(datM, 2, function(x){names(x) <- rownames(datM);  mean(tail(sort(x, decreasing=TRUE), length(gene_dn) ), na.rm=TRUE) })
     max_dn <- (top_mean - mu)* length(gene_dn)^(1/2)/sigma
     sim_dn <- zscore_dn/max_dn
-    similarity <- (sim_up + sim_dn)/2
+    similarity <- round((sim_up + sim_dn)/2, 4)
     
-    score <- (zscore_up - zscore_dn)/2
+    score <- round((zscore_up - zscore_dn)/2, 4)
     P_Value <- 2*pnorm(-abs(score))
-    FDR <- p.adjust(pval, method = adjust)
-    cbind(score, similarity, P_Value, FDR)
+    FDR <- p.adjust(P_Value, method = adjust)
+    res <- cbind(score, similarity, P_Value, FDR)
+    res[order(res[,"P_Value"]),]
 }
