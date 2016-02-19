@@ -1,7 +1,7 @@
 #' PAGE
 #' 
 #' Gene Expression Signature Similarity based on Parametric Analysis of Gene Set Enrichment
-#' @name PAGE
+#' @name PAGE_package
 #' @docType package
 #' @keywords package
 NULL
