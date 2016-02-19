@@ -44,11 +44,11 @@ page1 <- function(datM, geneV, isRank=TRUE, adjust="fdr"){
     # similarity
     top_mean <- apply(datM, 2, function(x){names(x) <- rownames(datM);  mean(head(sort(x, decreasing=TRUE), length(geneV) ), na.rm=TRUE) })
     z_max <- (top_mean - mu)* length(geneV)^(1/2)/sigma
-    sim <- zscore/abs(z_max)
+    similarity <- zscore/abs(z_max)
     
-    pval <- 2*pnorm(-abs(zscore))
-    fdr <- p.adjust(pval, method = adjust)
-    cbind(zscore, sim, pval, fdr)
+    P_Value <- 2*pnorm(-abs(zscore))
+    FDR <- p.adjust(pval, method = adjust)
+    cbind(zscore, similarity, P_Value, FDR)
 }
 
 #' @rdname page
@@ -76,10 +76,10 @@ page2 <- function(datM, gene_up, gene_dn, isRank=TRUE, adjust="fdr"){
     top_mean <- apply(datM, 2, function(x){names(x) <- rownames(datM);  mean(tail(sort(x, decreasing=TRUE), length(gene_dn) ), na.rm=TRUE) })
     max_dn <- (top_mean - mu)* length(gene_dn)^(1/2)/sigma
     sim_dn <- zscore_dn/max_dn
-    sim <- (sim_up + sim_dn)/2
+    similarity <- (sim_up + sim_dn)/2
     
     score <- (zscore_up - zscore_dn)/2
-    pval <- 2*pnorm(-abs(score))
-    fdr <- p.adjust(pval, method = adjust)
-    cbind(score, sim, pval, fdr)
+    P_Value <- 2*pnorm(-abs(score))
+    FDR <- p.adjust(pval, method = adjust)
+    cbind(score, similarity, P_Value, FDR)
 }
