@@ -14,7 +14,7 @@ page2(datM, gene_up, gene_dn, isRank = TRUE, adjust = "fdr")
 
 \item{geneV}{a gene symbol name vector}
 
-\item{isRank}{datM is rank or not}
+\item{isRank}{datM is rank or not (the top one up-regualted gene has rank 1).}
 
 \item{adjust}{p.adjust.methods. see \code{\link[stats]{p.adjust}}}
 
@@ -27,12 +27,13 @@ Gene Expression Signature Similarity based on Parametric Analysis of Gene Set En
 }
 \examples{
 data(Psoriasis_Etanercept_LogFC)
-datM <- apply(Psoriasis_Etanercept_LogFC, 2, rank)
+datM <- apply(-Psoriasis_Etanercept_LogFC, 2, rank)
 gene_up <- names(head(sort(Psoriasis_Etanercept_LogFC[,1], decreasing=TRUE), 100) )
 gene_dn <- names(head(sort(Psoriasis_Etanercept_LogFC[,1], decreasing=FALSE), 100) )
 page1(datM, gene_up)
 page1(datM, gene_dn)
 page2(datM, gene_up, gene_dn)
+
 
 }
 \references{

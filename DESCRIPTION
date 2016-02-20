@@ -7,7 +7,8 @@ Description: Gene Expression Signature Similarity based on Parametric Analysis o
     Set Enrichment.
 Depends:
     R (>= 3.2.0),
-    methods,
+    methods
+Imports:
     parallel,
     foreach,
     doParallel
