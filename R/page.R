@@ -88,11 +88,11 @@ page2 <- function(datM, gene_up, gene_dn, center=TRUE, isRank=TRUE, adjust="fdr"
     top_mean <- apply(datM, 2, function(x){names(x) <- rownames(datM);  mean(tail(sort(x, decreasing=TRUE), length(gene_dn) ), na.rm=TRUE) })
     max_dn <- (top_mean - mu)* length(gene_dn)^(1/2)/sigma
     sim_dn <- zscore_down/max_dn
-    similarity <- round((sim_up + sim_dn)/2, 4)
+    similarity <- round((sim_up + sim_dn)/2, 2)
     
-    score <- round((zscore_up - zscore_down)/2, 4)
-    zscore_up <- round(zscore_up, 4)
-    zscore_down <- round(zscore_down, 4)
+    score <- round((zscore_up - zscore_down)/2, 2)
+    zscore_up <- round(zscore_up, 2)
+    zscore_down <- round(zscore_down, 2)
     
     P_Value <- as.numeric( format(2*pnorm(-abs(score)), digits=4) )
     FDR <- as.numeric( format(p.adjust(P_Value, method = adjust), digits=4) )
