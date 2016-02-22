@@ -6,6 +6,7 @@
 #' @param geneV a gene symbol name vector
 #' @param gene_up a up-regulated gene symbol name vector
 #' @param gene_dn a down-regulated gene symbol name vector
+#' @param center boolean - median center gene expression matrix columns prior to analysis.
 #' @param isRank datM is rank or not (the top one up-regualted gene has rank 1).
 #' @param adjust p.adjust.methods. see \code{\link[stats]{p.adjust}}
 #' 
@@ -30,11 +31,13 @@
 #' 
 #' 
 #' @rdname page
-page1 <- function(datM, geneV, isRank=TRUE, adjust="fdr"){
+page1 <- function(datM, geneV, center=TRUE, isRank=TRUE, adjust="fdr"){
     
+    if (center) { datM <- scale(datM, scale=FALSE) }
     if (isRank) {
-        datM <- -scale(datM, scale=FALSE)
+        datM <- -datM
     }
+    
     mu <- apply(datM, 2, mean, na.rm=TRUE)
     sigma <- apply(datM, 2, sd, na.rm=TRUE)
     
@@ -54,10 +57,12 @@ page1 <- function(datM, geneV, isRank=TRUE, adjust="fdr"){
 
 #' @rdname page
 #' @export 
-page2 <- function(datM, gene_up, gene_dn, isRank=TRUE, adjust="fdr"){
+page2 <- function(datM, gene_up, gene_dn, center=TRUE, isRank=TRUE, adjust="fdr"){
     
+    
+    if (center) { datM <- scale(datM, scale=FALSE) }
     if (isRank) {
-        datM <- -scale(datM, scale=FALSE)
+        datM <- -datM
     }
     mu <- apply(datM, 2, mean, na.rm=TRUE)
     sigma <- apply(datM, 2, sd, na.rm=TRUE)

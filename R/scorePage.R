@@ -29,6 +29,7 @@
 #' 
 #' data(Psoriasis_Etanercept_LogFC)
 #' 
+#' 
 #' sim <- scorePage(Psoriasis_Etanercept_LogFC, type="avg")$score
 #' 
 #' 

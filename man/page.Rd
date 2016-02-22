@@ -5,14 +5,17 @@
 \alias{page2}
 \title{Gene Expression Signature Similarity}
 \usage{
-page1(datM, geneV, isRank = TRUE, adjust = "fdr")
+page1(datM, geneV, center = TRUE, isRank = TRUE, adjust = "fdr")
 
-page2(datM, gene_up, gene_dn, isRank = TRUE, adjust = "fdr")
+page2(datM, gene_up, gene_dn, center = TRUE, isRank = TRUE,
+  adjust = "fdr")
 }
 \arguments{
 \item{datM}{A Gene Expression Signature matrix including logFC or rank}
 
 \item{geneV}{a gene symbol name vector}
+
+\item{center}{boolean - median center gene expression matrix columns prior to analysis.}
 
 \item{isRank}{datM is rank or not (the top one up-regualted gene has rank 1).}
 
