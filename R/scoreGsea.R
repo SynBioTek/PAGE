@@ -6,17 +6,19 @@
 #' @param top top genes selected
 #' @param ncore the number of cores used
 #' @param type avg or max
-#' @import 
+#' @export scoreGsea
+#'  
 #' @examples 
+#' data(Psoriasis_Etanercept_LogFC)
+#' Psoriasis_Etanercept_rank <- apply(-Psoriasis_Etanercept_LogFC, 2, rank)
 #' 
-#' 
-gsea <- function(dat, top=250, ncore=2, type=c("avg", "max") ) {
+#' sim <- scoreGsea(Psoriasis_Etanercept_rank, type="avg")
+scoreGsea <- function(dat, top=250, ncore=2, type=c("avg", "max") ) {
     
     
     ES <- matrix(-2, ncol=ncol(dat), nrow=ncol(dat) )
     for (i in 1:ncol(dat) ) {
         for (j in 1:ncol(dat) ) {
-            # i = 1; j=2
             ES[i,j] <- quickenrichmentscore(which(dat[,j]<=top), which(dat[,j]>=nrow(dat)-top+1), dat[,i])
         }
     }
