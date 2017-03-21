@@ -2,6 +2,9 @@
 
 export(page1)
 export(page2)
+export(quickenrichmentscore)
+export(scoreGsea)
+export(scoreGseam)
 export(scorePage)
 import(doParallel)
 import(foreach)

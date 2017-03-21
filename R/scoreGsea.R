@@ -13,8 +13,11 @@
 #' Psoriasis_Etanercept_rank <- apply(-Psoriasis_Etanercept_LogFC, 2, rank)
 #' 
 #' sim <- scoreGsea(Psoriasis_Etanercept_rank, type="avg")
-scoreGsea <- function(dat, top=250, ncore=2, type=c("avg", "max") ) {
+#' sim <- scoreGseam(Psoriasis_Etanercept_rank, type="avg", ncore=2)
+#' 
+scoreGsea <- function(dat, top=250, type=c("avg", "max") ) {
     
+    type <- match.arg(type, c("avg", "max"))
     
     ES <- matrix(-2, ncol=ncol(dat), nrow=ncol(dat) )
     for (i in 1:ncol(dat) ) {
@@ -32,3 +35,40 @@ scoreGsea <- function(dat, top=250, ncore=2, type=c("avg", "max") ) {
     return (sim)
     
 }
+
+#' @inheritParams scoreGsea
+#' @import methods
+#' @import parallel
+#' @import foreach
+#' @import doParallel
+#' @export scoreGseam
+#' @rdname scoreGsea
+#' 
+scoreGseam <- function(dat, top=250, type=c("avg", "max"), ncore=2) {
+    
+    type <- match.arg(type, c("avg", "max"))
+    
+    cl <- parallel::makeCluster(ncore)
+    doParallel::registerDoParallel(cl)
+
+    ES <- foreach (j = 1:ncol(dat), .combine = cbind) %:% 
+        foreach(i = 1:ncol(dat), .combine = c) %dopar% {
+        quickenrichmentscore(which(dat[,j]<=top), which(dat[,j]>=nrow(dat)-top+1), dat[,i])
+    }
+    
+    parallel::stopCluster(cl)
+    
+    if (type=="avg") {
+        sim <- (ES + t(ES))/2
+    } else if (type=="max") {
+        sim <- pmax(ES, t(ES))
+    }
+    rownames(sim) <- colnames(sim) <- colnames(dat)
+    
+    return (sim)
+    
+    
+}
+
+
+

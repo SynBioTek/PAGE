@@ -1,7 +1,7 @@
 Package: PAGE
 Title: Gene Expression Signature Similarity based on Parametric Analysis of Gene
     Set Enrichment
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Zhilong", "Jia", email = "zhilongjia@gmail.com", role = c("aut", "cre"))
 Description: Gene Expression Signature Similarity based on Parametric Analysis of Gene
     Set Enrichment.

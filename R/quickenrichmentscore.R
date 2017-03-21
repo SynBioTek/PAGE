@@ -2,10 +2,31 @@
 #' 
 #' quickenrichmentscore
 #' 
-#' @keywords internal
+#' @param S rank of up-regualted genes
+#' @param S1 rank of down-regulated genes
+#' @param List a rank vector
+#' @return similarity based on averaged GSEA Enrichment score
+#' @export
+#' @author Yang Cao
 #' @source http://bioconductor.org/packages/GeneExpressionSignature/
-quickenrichmentscore <-
-function(S,S1,List){
+#' @examples 
+#' data(Psoriasis_Etanercept_LogFC)
+#' dat <- apply(-Psoriasis_Etanercept_LogFC, 2, rank)
+#' SignatureLength <- 250
+#' 
+#' # caculate similarity only for some columns
+#' sim_mat <- matrix(-2, ncol=ncol(dat), nrow=ncol(dat))
+#' for (i in 11:15) {
+#'     for (j in 1:10) {
+#'         sim_mat[j,i] <- (quickenrichmentscore(which(dat[,j]<=SignatureLength), 
+#'         which(dat[,j]>=nrow(dat)-SignatureLength+1), dat[,i]) + 
+#'         quickenrichmentscore(which(dat[,i]<=SignatureLength), 
+#'         which(dat[,i]>=nrow(dat)-SignatureLength+1), dat[,j]) )/2
+#'     }
+#' 
+#' }
+#' 
+quickenrichmentscore <- function(S,S1,List){
 	Or_list=List;
 	#List=sort(List);
 	#List=as.matrix(List)

@@ -42,6 +42,7 @@ setGeneric("scorePage",
 setMethod("scorePage", signature(dat="matrix"),
     function(dat, top=250, ncore=2, type=c("avg", "max"), similarity=TRUE, adjust="fdr", center=TRUE, verbose=FALSE) {
     
+    type <- match.arg(type, c("avg", "max"))
     if (center) { dat <- scale(dat, scale=FALSE) }
 
     # mu is mean of total logFC, mod is related with standard deviation of total logFC.
