@@ -11,4 +11,3 @@
 An example dataset of Psoriasis and Etanercept.
 }
 \keyword{datasets}
-

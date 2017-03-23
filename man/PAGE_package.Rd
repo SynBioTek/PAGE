@@ -9,4 +9,3 @@
 Gene Expression Signature Similarity based on Parametric Analysis of Gene Set Enrichment
 }
 \keyword{package}
-

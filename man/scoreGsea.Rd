@@ -7,7 +7,8 @@
 \usage{
 scoreGsea(dat, top = 250, type = c("avg", "max"))
 
-scoreGseam(dat, top = 250, type = c("avg", "max"), ncore = 2)
+scoreGseam(dat, top = 250, type = c("avg", "max"), ncore = 2,
+  verbose = FALSE)
 }
 \arguments{
 \item{dat}{gene rank matrix or data.frame}
@@ -17,6 +18,8 @@ scoreGseam(dat, top = 250, type = c("avg", "max"), ncore = 2)
 \item{type}{avg or max}
 
 \item{ncore}{the number of cores used}
+
+\item{verbose}{verbose}
 }
 \description{
 Gene Expression Signature Similarity based on  Gene Set Enrichment Analysis
@@ -29,4 +32,3 @@ sim <- scoreGsea(Psoriasis_Etanercept_rank, type="avg")
 sim <- scoreGseam(Psoriasis_Etanercept_rank, type="avg", ncore=2)
 
 }
-

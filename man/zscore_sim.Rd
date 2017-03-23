@@ -12,4 +12,3 @@ zscore_sim
 convert zscore to similarity
 }
 \keyword{internal}
-

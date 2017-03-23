@@ -6,6 +6,7 @@
 #' @param top top genes selected
 #' @param ncore the number of cores used
 #' @param type avg or max
+#' @param verbose verbose
 #' @export scoreGsea
 #'  
 #' @examples 
@@ -44,12 +45,13 @@ scoreGsea <- function(dat, top=250, type=c("avg", "max") ) {
 #' @export scoreGseam
 #' @rdname scoreGsea
 #' 
-scoreGseam <- function(dat, top=250, type=c("avg", "max"), ncore=2) {
+scoreGseam <- function(dat, top=250, type=c("avg", "max"), ncore=2, verbose=FALSE) {
     
     type <- match.arg(type, c("avg", "max"))
     
     cl <- parallel::makeCluster(ncore)
     doParallel::registerDoParallel(cl)
+    if (verbose) {print(paste("getDoParWorkers:", foreach::getDoParWorkers()))}
 
     ES <- foreach (j = 1:ncol(dat), .combine = cbind) %:% 
         foreach(i = 1:ncol(dat), .combine = c) %dopar% {

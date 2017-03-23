@@ -43,4 +43,3 @@ for (i in 11:15) {
 \author{
 Yang Cao
 }
-
